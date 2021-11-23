@@ -1,16 +1,26 @@
 package com.qtx.test;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 
 /** @Author: QTX @Date: 2021/11/23 */
 public class SparseArray {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		int[][] ints = new int[10][10];
 		for (int[] anInt : ints) {
 			Arrays.fill(anInt, 0);
 		}
 		printArrays(ints);
+		File file = new File("map.txt");
+		file.createNewFile();
+		saveArray("map.txt", ints);
+		readArray("map.txt");
 	}
 
 	/**
@@ -77,7 +87,44 @@ public class SparseArray {
 		return ints;
 	}
 
-	public static void saveArray(String path, int[][] array) {
-		
+	/**
+	 * 保存稀疏数组到本地
+	 *
+	 * @param path  路径
+	 * @param array 数组
+	 */
+	public static void saveArray(String path, int[][] array) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+		for (int[] ints : array) {
+			for (int i : ints) {
+				try {
+					writer.write(i);
+					writer.write(",");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			writer.newLine();
+		}
+		writer.flush();
+		try {
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 读取文件生成稀疏数组
+	 *
+	 * @param path 文件路径
+	 */
+	public static void readArray(String path) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(path));
+		String s = null;
+		while ((s = reader.readLine()) != null) {
+			String[] split = s.split(",");
+			System.out.println(Arrays.toString(split));
+		}
 	}
 }
