@@ -98,7 +98,9 @@ public class SparseArray {
 		for (int[] ints : array) {
 			for (int i : ints) {
 				try {
-					writer.write(i);
+					//踩坑writer.write(int i);,jdk提供的默认方法可以传递int类型,源码实际是把int强制转化成了char,这样会导致没有对应的ASCII的数字就会乱码
+					//解决办法:把数字转换成string或者自己提前转换成char测试
+					writer.write(Integer.toString(i));
 					writer.write(",");
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -125,6 +127,7 @@ public class SparseArray {
 		while ((s = reader.readLine()) != null) {
 			String[] split = s.split(",");
 			System.out.println(Arrays.toString(split));
+			//todo:还未转化成数字
 		}
 	}
 }
