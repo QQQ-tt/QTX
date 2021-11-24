@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /** @Author: QTX @Date: 2021/11/23 */
 public class SparseArray {
@@ -20,7 +22,8 @@ public class SparseArray {
 		File file = new File("map.txt");
 		file.createNewFile();
 		saveArray("map.txt", ints);
-		readArray("map.txt");
+		int[][] readArray = readArray("map.txt");
+		System.out.println(Arrays.deepToString(readArray));
 	}
 
 	/**
@@ -121,13 +124,24 @@ public class SparseArray {
 	 *
 	 * @param path 文件路径
 	 */
-	public static void readArray(String path) throws IOException {
+	public static int[][] readArray(String path) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(path));
-		String s = null;
+		String s;
+		int x = 0;
+		Map<Integer, String[]> map = new HashMap<>(15);
 		while ((s = reader.readLine()) != null) {
 			String[] split = s.split(",");
-			System.out.println(Arrays.toString(split));
-			//todo:还未转化成数字
+			map.put(x, split);
+			x++;
 		}
+		System.out.println(x + "--" + map.size());
+		int[][] ints = new int[map.size()][x];
+		for (Map.Entry<Integer, String[]> m : map.entrySet()) {
+			int i = 0;
+			for (String s1 : m.getValue()) {
+				ints[m.getKey()][i++] = Integer.parseInt(s1);
+			}
+		}
+		return ints;
 	}
 }
