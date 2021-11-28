@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** @Author: QTX @Date: 2021/11/23 */
-public class SparseArray {
+public class MySparseArray {
 
 	public static void main(String[] args) throws IOException {
 		int[][] ints = new int[10][10];
