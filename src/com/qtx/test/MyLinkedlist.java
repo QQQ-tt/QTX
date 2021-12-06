@@ -61,7 +61,9 @@ public class MyLinkedlist {
     }
 }
 
-
+/**
+ * 实体类
+ */
 class Person {
     private final String name;
     private final String address;
@@ -77,6 +79,9 @@ class Person {
     }
 }
 
+/**
+ * 实体类
+ */
 class Num {
     private int i;
 
