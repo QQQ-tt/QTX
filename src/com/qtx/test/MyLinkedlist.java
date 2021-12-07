@@ -8,6 +8,11 @@ import java.util.Collection;
  * @author qtx
  */
 public class MyLinkedlist {
+    private final Num num1 = new Num(1);
+    private final Num num2 = new Num(2);
+    private final Num num3 = new Num(3);
+    private final Num num4 = new Num(4);
+
     public static void main(String[] args) {
         Person person = new Person("小红", "上海");
         Person person1 = new Person("小黑", "北京");
@@ -48,16 +53,21 @@ public class MyLinkedlist {
 
     }
 
-    private final Num num1 = new Num(1);
-    private final Num num2 = new Num(2);
-    private final Num num3 = new Num(3);
-    private final Num num4 = new Num(4);
-
     @Test
     public void test() {
         SingleLinkedList<Num> list = new SingleLinkedList<>();
         list.circularAdd(num1).circularAdd(num2).circularAdd(num3).circularAdd(num4);
         list.showList();
+    }
+
+    @Test
+    public void test1() {
+        DoubleLinkedList<Num> list = new DoubleLinkedList<>();
+        list.add(num1).add(num2).add(num3).add(num4);
+        list.show();
+        System.out.println("--------------");
+        list.delete(4);
+        list.show();
     }
 }
 
@@ -99,23 +109,6 @@ class Num {
  * 单链表
  */
 class SingleLinkedList<E> {
-    /**
-     * 节点
-     *
-     * @param <E> 节点内容指定对象类型
-     */
-    private static class Node<E> {
-        E object;
-        Node<E> next;
-
-        public Node() {
-        }
-
-        public Node(E obj) {
-            this.object = obj;
-        }
-    }
-
     private final Node<E> heroNode;
 
     public SingleLinkedList() {
@@ -142,7 +135,7 @@ class SingleLinkedList<E> {
         while (temp.next != null) {
             temp = temp.next;
         }
-        temp.next = new Node<E>(node);
+        temp.next = new Node<>(node);
     }
 
     /**
@@ -310,6 +303,7 @@ class SingleLinkedList<E> {
      */
     public SingleLinkedList<E> linkedMerge(SingleLinkedList<E> list1, SingleLinkedList<E> list2) {
         //todo
+
         return null;
     }
 
@@ -318,6 +312,7 @@ class SingleLinkedList<E> {
      */
     public void sort() {
         //todo
+
     }
 
     /**
@@ -337,5 +332,104 @@ class SingleLinkedList<E> {
         temp.next = node;
         node.next = heroNode;
         return this;
+    }
+
+    /**
+     * 节点
+     *
+     * @param <E> 节点内容指定对象类型
+     */
+    private static class Node<E> {
+        E object;
+        Node<E> next;
+
+        public Node() {
+        }
+
+        public Node(E obj) {
+            this.object = obj;
+        }
+    }
+}
+
+/**
+ * 双链表
+ *
+ * @param <E> 指定对象类型
+ */
+class DoubleLinkedList<E> {
+    private final Node<E> one;
+
+    public DoubleLinkedList() {
+        this.one = new Node<>();
+    }
+
+    /**
+     * 添加数据
+     *
+     * @param obj 添加到此列的数据
+     *
+     * @return 链式调用
+     */
+    public DoubleLinkedList<E> add(E obj) {
+        Node<E> temp = one;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        Node<E> next = new Node<>(obj);
+        temp.next = next;
+        next.pre = temp;
+        return this;
+    }
+
+    /**
+     * 删除指定位置节点
+     *
+     * @return 链式调用
+     */
+    public DoubleLinkedList<E> delete(int i) {
+        Node<E> temp = one;
+        for (int j = 0; j < i; j++) {
+            temp = temp.next;
+        }
+        //自我删除,temp被删除的节点
+        if (temp.next != null) {
+            temp.next.pre = temp.pre;
+        }
+        temp.pre.next = temp.next;
+        return this;
+    }
+
+    /**
+     * 展示链表内容(需要重写toString()方法)
+     */
+    public void show() {
+        if (one.next == null) {
+            System.out.println("链表为空");
+            return;
+        }
+        Node<E> temp = one.next;
+        while (temp != null) {
+            System.out.println(temp.object);
+            temp = temp.next;
+        }
+    }
+
+    /**
+     * 节点内部类
+     *
+     * @param <E>
+     */
+    private static class Node<E> {
+        E object;
+        Node<E> next;
+        Node<E> pre;
+
+        public Node(E object) {
+            this.object = object;
+        }
+
+        public Node() {
+        }
     }
 }
