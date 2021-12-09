@@ -96,14 +96,14 @@ class ArrayStack {
 }
 
 /**
- * 链表模拟栈
+ * 单链表模拟栈
  */
 class LinkedStack {
-    private int maxSize;
+    private final int maxSize;
     private int num;
     private Node one;
 
-    class Node {
+    static class Node {
         int value;
         Node next;
 
