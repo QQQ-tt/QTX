@@ -1,4 +1,4 @@
-package com.qtx.test;
+package com.qtx.study;
 
 import org.junit.Test;
 
@@ -137,7 +137,7 @@ class LinkedStack {
         one = new Node(value);
         one.next = temp;
         num++;
-        
+
     }
 
     public int pop() {

@@ -1,4 +1,4 @@
-package com.qtx.test;
+package com.qtx.study;
 
 import org.junit.Test;
 
