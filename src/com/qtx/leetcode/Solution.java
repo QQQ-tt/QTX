@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.IntStream;
 
 /**
  * @Author: QTX
@@ -127,10 +126,46 @@ public class Solution {
         return nums1;
     }
 
+    /**
+     * 合并两个有序数组,双指针
+     *
+     * @param nums1 数组1
+     * @param m     截取长度
+     * @param nums2 数组2
+     * @param n     截取长度
+     */
+    public int[] merge1(int[] nums1, int m, int[] nums2, int n) {
+        int[] ints = new int[m];
+        System.arraycopy(nums1, 0, ints, 0, m);
+
+        int x = 0, y = 0, z = 0;
+        while ((x < m) && (y < n)) {
+            if (ints[x] < nums2[y]) {
+                nums1[z++] = ints[x++];
+            } else {
+                nums1[z++] = nums2[y++];
+            }
+        }
+        if (x < m) {
+            System.arraycopy(ints, x, nums1, x + y, m + n - x - y);
+        }
+        if (y < n) {
+            System.arraycopy(nums2, y, nums1, x + y, m + n - x - y);
+        }
+        return nums1;
+    }
+
     @Test
     public void mergeTest() {
-        int[] ints = {1, 2, 3, 0, 0, 0, 0};
-        int[] ints1 = {2, 4, 8, 9};
-        System.out.println(Arrays.toString(merge(ints, 3, ints1, 4)));
+        int[] ints = {1, 2, 3, 0, 0, 0};
+        int[] ints1 = {2, 5, 6};
+        //System.out.println(Arrays.toString(merge(ints, 3, ints1, 4)));
+        System.out.println(Arrays.toString(merge1(ints, 3, ints1, 3)));
+    }
+
+    @Test
+    public void arrayTest() {
+        int[] ints = new int[5];
+        System.out.println(ints.length);
     }
 }
