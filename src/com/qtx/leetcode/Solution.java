@@ -167,7 +167,7 @@ public class Solution {
     }
 
     /**
-     * 两个数组的交集,
+     * 两个数组的交集,哈希表
      *
      * @param nums1 数组1
      * @param nums2 数组2
@@ -227,6 +227,37 @@ public class Solution {
         int[] num2 = {1, 2, 2, 4};
         System.out.println(Arrays.toString(intersect(num1, num2)));
         System.out.println(Arrays.toString(intersect1(num1, num2)));
+    }
 
+    /**
+     * 买股票最佳时机,动态规划
+     *
+     * @param prices i天对应的价格
+     *
+     * @return 最大利润
+     */
+    public int maxProfit(int[] prices) {
+        if (prices == null) {
+            return 0;
+        }
+        int[] ints = new int[prices.length];
+        System.arraycopy(prices, 0, ints, 0, prices.length);
+        Arrays.sort(ints);
+        int minPrice = ints[ints.length - 1], maxProfit = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            }
+            if (prices[i] - minPrice > maxProfit) {
+                maxProfit = prices[i] - minPrice;
+            }
+        }
+        return maxProfit;
+    }
+
+    @Test
+    public void maxProfitTest() {
+        int[] ints = {7, 1, 5, 3, 6, 4};
+        System.out.println(maxProfit(ints));
     }
 }
