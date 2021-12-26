@@ -2,10 +2,7 @@ package com.qtx.leetcode;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: QTX
@@ -113,7 +110,7 @@ public class Solution {
     }
 
     /**
-     * 合并两个有序数组
+     * 合并两个有序数组,利用jdk现有方法(俩数组有效内容长度和为m)
      *
      * @param nums1 数组1
      * @param m     截取长度
@@ -167,5 +164,73 @@ public class Solution {
     public void arrayTest() {
         int[] ints = new int[5];
         System.out.println(ints.length);
+    }
+
+    /**
+     * 两个数组的交集,
+     *
+     * @param nums1 数组1
+     * @param nums2 数组2
+     *
+     * @return 交集数组集合
+     */
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int length = (int) Math.ceil(nums1.length > nums2.length ? nums1.length / 0.75 : nums2.length / 0.75);
+        List<Integer> list = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>(length);
+        for (int i : nums1) {
+            Integer num = map.getOrDefault(i, 0) + 1;
+            map.put(i, num);
+        }
+        for (int i : nums2) {
+            Integer integer = map.get(i);
+            if (integer != null && integer != 0) {
+                list.add(i);
+                map.put(i, integer - 1);
+            }
+        }
+        int[] ints = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            ints[i] = list.get(i);
+        }
+        return ints;
+    }
+
+    /**
+     * 官方答案
+     */
+    public int[] intersect1(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return intersect1(nums2, nums1);
+        }
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int num : nums1) {
+            int count = map.getOrDefault(num, 0) + 1;
+            map.put(num, count);
+        }
+        int[] intersection = new int[nums1.length];
+        int index = 0;
+        for (int num : nums2) {
+            int count = map.getOrDefault(num, 0);
+            if (count > 0) {
+                intersection[index++] = num;
+                count--;
+                if (count > 0) {
+                    map.put(num, count);
+                } else {
+                    map.remove(num);
+                }
+            }
+        }
+        return Arrays.copyOfRange(intersection, 0, index);
+    }
+
+    @Test
+    public void intersectTest() {
+        int[] num1 = {1, 2, 2, 3};
+        int[] num2 = {1, 2, 2, 4};
+        System.out.println(Arrays.toString(intersect(num1, num2)));
+        System.out.println(Arrays.toString(intersect1(num1, num2)));
+
     }
 }
