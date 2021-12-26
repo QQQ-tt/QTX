@@ -189,11 +189,8 @@ public class Solution {
                 map.put(i, integer - 1);
             }
         }
-        int[] ints = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            ints[i] = list.get(i);
-        }
-        return ints;
+        int[] array = list.stream().mapToInt(Integer::intValue).toArray();
+        return array;
     }
 
     /**
@@ -227,7 +224,7 @@ public class Solution {
 
     @Test
     public void intersectTest() {
-        int[] num1 = {1, 2, 2, 3};
+        int[] num1 = {1, 2, 2};
         int[] num2 = {1, 2, 2, 4};
         System.out.println(Arrays.toString(intersect(num1, num2)));
         System.out.println(Arrays.toString(intersect1(num1, num2)));
