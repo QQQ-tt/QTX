@@ -240,16 +240,13 @@ public class Solution {
         if (prices == null) {
             return 0;
         }
-        int[] ints = new int[prices.length];
-        System.arraycopy(prices, 0, ints, 0, prices.length);
-        Arrays.sort(ints);
-        int minPrice = ints[ints.length - 1], maxProfit = 0;
-        for (int i = 0; i < prices.length - 1; i++) {
-            if (prices[i] < minPrice) {
-                minPrice = prices[i];
+        int minPrice = Integer.MAX_VALUE, maxProfit = 0;
+        for (int price : prices) {
+            if (price < minPrice) {
+                minPrice = price;
             }
-            if (prices[i] - minPrice > maxProfit) {
-                maxProfit = prices[i] - minPrice;
+            if (price - minPrice > maxProfit) {
+                maxProfit = price - minPrice;
             }
         }
         return maxProfit;
@@ -257,7 +254,7 @@ public class Solution {
 
     @Test
     public void maxProfitTest() {
-        int[] ints = {7, 1, 5, 3, 6, 4};
+        int[] ints = {1, 2};
         System.out.println(maxProfit(ints));
     }
 }
