@@ -189,8 +189,7 @@ public class Solution {
                 map.put(i, integer - 1);
             }
         }
-        int[] array = list.stream().mapToInt(Integer::intValue).toArray();
-        return array;
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
 
     /**
