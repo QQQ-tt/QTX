@@ -266,4 +266,138 @@ public class Solution {
     public boolean isValidSudoku(char[][] board) {
         return true;
     }
+
+    /**
+     * 重塑矩阵
+     *
+     * @param mat 原始矩阵
+     * @param r   行数
+     * @param c   列数
+     *
+     * @return 新矩阵
+     */
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        if (mat.length * mat[0].length != r * c) {
+            return mat;
+        }
+        int[][] ints = new int[r][c];
+        int x = 0, y = 0;
+        for (int[] num : mat) {
+            for (int i : num) {
+                ints[x][y++] = i;
+                if (y == c) {
+                    x++;
+                    y = 0;
+                }
+            }
+        }
+        return ints;
+    }
+
+    /**
+     * 重塑矩阵 ,降维
+     *
+     * @param nums 原始矩阵
+     * @param r    行数
+     * @param c    列数
+     *
+     * @return 新矩阵
+     */
+    public int[][] matrixReshape1(int[][] nums, int r, int c) {
+        int m = nums.length;
+        int n = nums[0].length;
+        if (m * n != r * c) {
+            return nums;
+        }
+        int[][] ans = new int[r][c];
+        for (int x = 0; x < m * n; ++x) {
+            ans[x / c][x % c] = nums[x / n][x % n];
+        }
+        return ans;
+    }
+
+    @Test
+    public void matrixReshapeTest() {
+        int[][] ints = {{1, 2}, {1, 2}, {1, 2}};
+        System.out.println(Arrays.deepToString(matrixReshape(ints, 2, 3)));
+    }
+
+    @Test
+    public void intDivisionTest() {
+        System.out.println(0 / 3);
+        System.out.println(1 / 3);
+        System.out.println(2 / 3);
+        System.out.println(3 / 3);
+        System.out.println("-----");
+        System.out.println(0 % 3);
+        System.out.println(1 % 3);
+        System.out.println(2 % 3);
+        System.out.println(3 % 3);
+        System.out.println("-----");
+        double i = 1;
+        double j = 3;
+        System.out.println(i / j);
+    }
+
+    /**
+     * 杨辉三角
+     *
+     * @param numRows 层数
+     *
+     * @return 杨辉三角
+     */
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> integers = new ArrayList<>(i + 1);
+            for (int j = 0; j < i + 1; j++) {
+                if (j == 0 || j == i) {
+                    integers.add(1);
+                } else {
+                    integers.add(0);
+                }
+            }
+            list.add(integers);
+        }
+        if (numRows > 2) {
+            for (int i = 2; i < list.size(); i++) {
+                List<Integer> integers = list.get(i);
+                for (int j = 1; j < integers.size() - 1; j++) {
+                    integers.set(j, list.get(i - 1).get(j - 1) + list.get(i - 1).get(j));
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 杨辉三角
+     *
+     * @param numRows 层数
+     *
+     * @return 杨辉三角
+     */
+    public List<List<Integer>> generate1(int numRows) {
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> integers = new ArrayList<>();
+            for (int j = 0; j < i + 1; j++) {
+                if (j == 0 || j == i) {
+                    integers.add(1);
+                } else {
+                    integers.add(list.get(i - 1).get(j - 1) + list.get(i - 1).get(j));
+                }
+            }
+            list.add(integers);
+        }
+        return list;
+    }
+
+    @Test
+    public void generateTest() {
+        List<List<Integer>> list = generate1(5);
+        for (List<Integer> integers : list) {
+            System.out.println(integers.toString());
+        }
+    }
 }
