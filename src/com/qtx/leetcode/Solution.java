@@ -257,4 +257,13 @@ public class Solution {
         int[] ints = {1, 2};
         System.out.println(maxProfit(ints));
     }
+
+    /**
+     * 有效数独
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku(char[][] board) {
+        return true;
+    }
 }
