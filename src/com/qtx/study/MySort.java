@@ -98,10 +98,10 @@ public class MySort {
             int temp = arr[i];
             int j = i;
             while (j > 0 && temp < arr[j - 1]) {
-                arr[j] = arr[j-1];
+                arr[j] = arr[j - 1];
                 j--;
             }
-            if (j != i){
+            if (j != i) {
                 arr[j] = temp;
             }
         }
@@ -109,7 +109,7 @@ public class MySort {
     }
 
     @Test
-    public void insertSortingTest(){
+    public void insertSortingTest() {
         int[] ints = {9, 5, 7, 8};
         int[] ints1 = insertSorting(ints);
         System.out.println(Arrays.toString(ints1));
@@ -124,6 +124,41 @@ public class MySort {
         System.out.println("共耗时：" + Duration.between(start, end).toMillis() + " 毫秒");
     }
 
+    /**
+     * 希尔排序
+     *
+     * @param arr
+     */
+    public int[] donaldShell(int[] arr) {
+        for (int x = arr.length / 2; x > 0; x /= 2) {
+            for (int i = x; i < arr.length; i++) {
+                int temp = arr[i];
+                int j = i;
+                while (j > 0 && temp < arr[j - x]) {
+                    arr[j] = arr[j - x];
+                    j--;
+                }
+                if (i != j) {
+                    arr[j] = temp;
+                }
+            }
+        }
+        return arr;
+    }
 
-
+    @Test
+    public void donaldShellTest() {
+        int[] ints = {9, 5, 7, 8};
+        int[] ints1 = donaldShell(ints);
+        System.out.println(Arrays.toString(ints1));
+        int[] arr = new int[10000];
+        for (int i = 0; i < arr.length; i++) {
+            double v = Math.random() * 10000;
+            arr[i] = (int) v;
+        }
+        Instant start = Instant.now();
+        int[] sorting = donaldShell(arr);
+        Instant end = Instant.now();
+        System.out.println("共耗时：" + Duration.between(start, end).toMillis() + " 毫秒");
+    }
 }

@@ -60,6 +60,7 @@ public class SolutionTest {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s;
         while ((s = br.readLine()) != null) {
+
             String[] qj = s.split(" ");
             Arrays.sort(qj, new Comparator<String>() {
                 @Override

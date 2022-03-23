@@ -260,7 +260,9 @@ public class Solution {
 
     /**
      * 有效数独
+     *
      * @param board
+     *
      * @return
      */
     public boolean isValidSudoku(char[][] board) {
@@ -400,4 +402,6 @@ public class Solution {
             System.out.println(integers.toString());
         }
     }
+    
+
 }
