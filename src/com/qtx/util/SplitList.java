@@ -12,14 +12,13 @@ public class SplitList<T> {
      *
      * @param list      被切集合
      * @param groupSize 每组长度
-     *
      * @return 被切割集合
      */
     public List<List<T>> splitList(List<T> list, int groupSize) {
         int size = list.size();
         // 减1是防止出现整除导致循环次数多一次
         int num = (size + groupSize - 1) / groupSize;
-        List<List<T>> lists = new ArrayList();
+        List<List<T>> lists = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             // 开始位置
             int fromIndex = i * groupSize;
