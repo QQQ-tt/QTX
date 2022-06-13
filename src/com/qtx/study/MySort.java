@@ -1,6 +1,6 @@
 package com.qtx.study;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.time.Instant;

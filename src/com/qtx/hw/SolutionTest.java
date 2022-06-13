@@ -1,6 +1,6 @@
 package com.qtx.hw;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,17 +8,14 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * @Author: QTX
- * @Date: 2022/2/16
+ * @Author: QTX @Date: 2022/2/16
  */
 public class SolutionTest {
-
 
     /**
      * 进制转换
      *
      * @param s 被转换16进制
-     *
      * @return 转换10进制
      */
     public int base(String s) {
@@ -62,12 +59,15 @@ public class SolutionTest {
         while ((s = br.readLine()) != null) {
 
             String[] qj = s.split(" ");
-            Arrays.sort(qj, new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    return Integer.parseInt(o1.split(",")[0]) - Integer.parseInt(o2.split(",")[0]);
-                }
-            });
+            Arrays.sort(
+                    qj,
+                    new Comparator<String>() {
+                        @Override
+                        public int compare(String o1, String o2) {
+                            return Integer.parseInt(o1.split(",")[0])
+                                    - Integer.parseInt(o2.split(",")[0]);
+                        }
+                    });
             Stack<String> stringStack = new Stack();
             stringStack.push(qj[0]);
             for (int i = 0; i < qj.length - 1; i++) {
@@ -76,8 +76,10 @@ public class SolutionTest {
                 String qjj = qj[i + 1];
                 String[] strings1 = qji.split(",");
                 String[] strings2 = qjj.split(",");
-                if (Integer.parseInt(String.valueOf(strings1[1])) >= Integer.parseInt(String.valueOf(strings2[0]))) {
-                    if (Integer.parseInt(String.valueOf(strings1[1])) <= Integer.parseInt(String.valueOf(strings2[1]))) {
+                if (Integer.parseInt(String.valueOf(strings1[1]))
+                        >= Integer.parseInt(String.valueOf(strings2[0]))) {
+                    if (Integer.parseInt(String.valueOf(strings1[1]))
+                            <= Integer.parseInt(String.valueOf(strings2[1]))) {
                         newQP.append(strings1[0]).append(",").append(strings2[1]);
                         stringStack.push(newQP.toString());
                     } else {
@@ -97,11 +99,10 @@ public class SolutionTest {
         }
     }
 
-
     /**
      * 两数之和
      *
-     * @param arr    数组
+     * @param arr 数组
      * @param target 目标求和
      */
     public int[] sum(int[] arr, int target) {
@@ -110,7 +111,7 @@ public class SolutionTest {
         for (int i = 0; i < arr.length; i++) {
             int x = target - arr[i];
             if (map.containsKey(x)) {
-                return new int[]{map.get(x) + 1, i + 1};
+                return new int[] {map.get(x) + 1, i + 1};
             }
             map.put(arr[i], i);
         }
@@ -119,8 +120,6 @@ public class SolutionTest {
 
     @Test
     public void sumTest() {
-        System.out.println(Arrays.toString(sum(new int[]{3, 4, 1, 9}, 12)));
+        System.out.println(Arrays.toString(sum(new int[] {3, 4, 1, 9}, 12)));
     }
-
-
 }

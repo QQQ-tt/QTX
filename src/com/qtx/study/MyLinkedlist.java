@@ -1,6 +1,6 @@
 package com.qtx.study;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.util.Collection;
 
@@ -50,7 +50,6 @@ public class MyLinkedlist {
         System.out.println("逆转");
         SingleLinkedList<Person> reverse = list.singlelistReverse();
         reverse.showList();
-
     }
 
     @Test
@@ -71,9 +70,7 @@ public class MyLinkedlist {
     }
 }
 
-/**
- * 实体类
- */
+/** 实体类 */
 class Person {
     private final String name;
     private final String address;
@@ -89,9 +86,7 @@ class Person {
     }
 }
 
-/**
- * 实体类
- */
+/** 实体类 */
 class Num {
     private int i;
 
@@ -105,9 +100,7 @@ class Num {
     }
 }
 
-/**
- * 单链表
- */
+/** 单链表 */
 class SingleLinkedList<E> {
     private final Node<E> heroNode;
 
@@ -158,9 +151,7 @@ class SingleLinkedList<E> {
         collection.forEach(this::add);
     }
 
-    /**
-     * 打印输出链表内容，需要实现toString()方法
-     */
+    /** 打印输出链表内容，需要实现toString()方法 */
     public void showList() {
         Node<E> temp = heroNode;
         while (temp.next != null) {
@@ -194,7 +185,6 @@ class SingleLinkedList<E> {
      * 获取链表第N个元素
      *
      * @param num 具体位置
-     *
      * @return 元素本事
      */
     public E getNode(int num) {
@@ -215,16 +205,13 @@ class SingleLinkedList<E> {
      * 获取链表倒数第N个元素
      *
      * @param num 具体位置
-     *
      * @return 元素本事
      */
     public E getReciprocalNode(int num) {
         return getNode(size() - num + 1);
     }
 
-    /**
-     * 删除最新添加的元素
-     */
+    /** 删除最新添加的元素 */
     public SingleLinkedList<E> deleteTail() {
         if (size() == 0) {
             return null;
@@ -252,7 +239,6 @@ class SingleLinkedList<E> {
      */
     public void delete(int num) {
         Node<E> temp = heroNode;
-
     }
 
     /**
@@ -298,20 +284,17 @@ class SingleLinkedList<E> {
      *
      * @param list1 单链表1
      * @param list2 单链表2
-     *
      * @return 合并后的单链表
      */
     public SingleLinkedList<E> linkedMerge(SingleLinkedList<E> list1, SingleLinkedList<E> list2) {
-        //todo
+        // todo
 
         return null;
     }
 
-    /**
-     * 单链表排序
-     */
+    /** 单链表排序 */
     public void sort() {
-        //todo
+        // todo
 
     }
 
@@ -343,8 +326,7 @@ class SingleLinkedList<E> {
         E object;
         Node<E> next;
 
-        public Node() {
-        }
+        public Node() {}
 
         public Node(E obj) {
             this.object = obj;
@@ -368,7 +350,6 @@ class DoubleLinkedList<E> {
      * 添加数据
      *
      * @param obj 添加到此列的数据
-     *
      * @return 链式调用
      */
     public DoubleLinkedList<E> add(E obj) {
@@ -392,7 +373,7 @@ class DoubleLinkedList<E> {
         for (int j = 0; j < i; j++) {
             temp = temp.next;
         }
-        //自我删除,temp被删除的节点
+        // 自我删除,temp被删除的节点
         if (temp.next != null) {
             temp.next.pre = temp.pre;
         }
@@ -400,9 +381,7 @@ class DoubleLinkedList<E> {
         return this;
     }
 
-    /**
-     * 展示链表内容(需要重写toString()方法)
-     */
+    /** 展示链表内容(需要重写toString()方法) */
     public void show() {
         if (one.next == null) {
             System.out.println("链表为空");
@@ -429,7 +408,6 @@ class DoubleLinkedList<E> {
             this.object = object;
         }
 
-        public Node() {
-        }
+        public Node() {}
     }
 }

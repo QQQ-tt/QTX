@@ -1,18 +1,14 @@
 package com.qtx.study;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @author qtx
  */
 public class MyStack {
-    public static void main(String[] args) {
+    public static void main(String[] args) {}
 
-    }
-
-    /**
-     * 数组
-     */
+    /** 数组 */
     @Test
     public void test() {
         ArrayStack stack = new ArrayStack(5);
@@ -42,9 +38,7 @@ public class MyStack {
     }
 }
 
-/**
- * 数组模拟栈
- */
+/** 数组模拟栈 */
 class ArrayStack {
     private final int[] stack;
     private final int maxSize;
@@ -95,9 +89,7 @@ class ArrayStack {
     }
 }
 
-/**
- * 单链表模拟栈
- */
+/** 单链表模拟栈 */
 class LinkedStack {
     private final int maxSize;
     private int num;
@@ -137,7 +129,6 @@ class LinkedStack {
         one = new Node(value);
         one.next = temp;
         num++;
-
     }
 
     public int pop() {

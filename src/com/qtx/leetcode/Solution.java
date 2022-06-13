@@ -1,19 +1,17 @@
 package com.qtx.leetcode;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.util.*;
 
 /**
- * @Author: QTX
- * @Date: 2021/12/22
+ * @Author: QTX @Date: 2021/12/22
  */
 public class Solution {
     /**
      * 数组重复与否
      *
      * @param nums 目标数组
-     *
      * @return 是否重复
      */
     public boolean containsDuplicate(int[] nums) {
@@ -38,7 +36,6 @@ public class Solution {
      * 连续最大和
      *
      * @param nums 目标数组
-     *
      * @return 求和结果
      */
     public int maxSubArray(int[] nums) {
@@ -64,9 +61,8 @@ public class Solution {
     /**
      * 俩数之和
      *
-     * @param nums   数组
+     * @param nums 数组
      * @param target 目标值
-     *
      * @return 俩数位置
      */
     public int[] twoSum(int[] nums, int target) {
@@ -85,9 +81,8 @@ public class Solution {
     /**
      * 俩数之和
      *
-     * @param nums   数组
+     * @param nums 数组
      * @param target 目标值
-     *
      * @return 俩数位置
      */
     public int[] twoSum1(int[] nums, int target) {
@@ -95,7 +90,7 @@ public class Solution {
         for (int i = 0; i < nums.length; i++) {
             int temp = target - nums[i];
             if (map.containsKey(temp)) {
-                return new int[]{map.get(temp), i};
+                return new int[] {map.get(temp), i};
             }
             map.put(temp, i);
         }
@@ -113,9 +108,9 @@ public class Solution {
      * 合并两个有序数组,利用jdk现有方法(俩数组有效内容长度和为m)
      *
      * @param nums1 数组1
-     * @param m     截取长度
+     * @param m 截取长度
      * @param nums2 数组2
-     * @param n     截取长度
+     * @param n 截取长度
      */
     public int[] merge(int[] nums1, int m, int[] nums2, int n) {
         System.arraycopy(nums2, 0, nums1, m, n);
@@ -127,9 +122,9 @@ public class Solution {
      * 合并两个有序数组,双指针
      *
      * @param nums1 数组1
-     * @param m     截取长度
+     * @param m 截取长度
      * @param nums2 数组2
-     * @param n     截取长度
+     * @param n 截取长度
      */
     public int[] merge1(int[] nums1, int m, int[] nums2, int n) {
         int[] ints = new int[m];
@@ -156,7 +151,7 @@ public class Solution {
     public void mergeTest() {
         int[] ints = {1, 2, 3, 0, 0, 0};
         int[] ints1 = {2, 5, 6};
-        //System.out.println(Arrays.toString(merge(ints, 3, ints1, 4)));
+        // System.out.println(Arrays.toString(merge(ints, 3, ints1, 4)));
         System.out.println(Arrays.toString(merge1(ints, 3, ints1, 3)));
     }
 
@@ -171,11 +166,15 @@ public class Solution {
      *
      * @param nums1 数组1
      * @param nums2 数组2
-     *
      * @return 交集数组集合
      */
     public int[] intersect(int[] nums1, int[] nums2) {
-        int length = (int) Math.ceil(nums1.length > nums2.length ? nums1.length / 0.75 : nums2.length / 0.75);
+        int length =
+                (int)
+                        Math.ceil(
+                                nums1.length > nums2.length
+                                        ? nums1.length / 0.75
+                                        : nums2.length / 0.75);
         List<Integer> list = new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>(length);
         for (int i : nums1) {
@@ -192,9 +191,7 @@ public class Solution {
         return list.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    /**
-     * 官方答案
-     */
+    /** 官方答案 */
     public int[] intersect1(int[] nums1, int[] nums2) {
         if (nums1.length > nums2.length) {
             return intersect1(nums2, nums1);
@@ -233,7 +230,6 @@ public class Solution {
      * 买股票最佳时机,动态规划
      *
      * @param prices i天对应的价格
-     *
      * @return 最大利润
      */
     public int maxProfit(int[] prices) {
@@ -262,7 +258,6 @@ public class Solution {
      * 有效数独
      *
      * @param board
-     *
      * @return
      */
     public boolean isValidSudoku(char[][] board) {
@@ -273,9 +268,8 @@ public class Solution {
      * 重塑矩阵
      *
      * @param mat 原始矩阵
-     * @param r   行数
-     * @param c   列数
-     *
+     * @param r 行数
+     * @param c 列数
      * @return 新矩阵
      */
     public int[][] matrixReshape(int[][] mat, int r, int c) {
@@ -300,9 +294,8 @@ public class Solution {
      * 重塑矩阵 ,降维
      *
      * @param nums 原始矩阵
-     * @param r    行数
-     * @param c    列数
-     *
+     * @param r 行数
+     * @param c 列数
      * @return 新矩阵
      */
     public int[][] matrixReshape1(int[][] nums, int r, int c) {
@@ -345,7 +338,6 @@ public class Solution {
      * 杨辉三角
      *
      * @param numRows 层数
-     *
      * @return 杨辉三角
      */
     public List<List<Integer>> generate(int numRows) {
@@ -376,7 +368,6 @@ public class Solution {
      * 杨辉三角
      *
      * @param numRows 层数
-     *
      * @return 杨辉三角
      */
     public List<List<Integer>> generate1(int numRows) {
@@ -402,6 +393,4 @@ public class Solution {
             System.out.println(integers.toString());
         }
     }
-    
-
 }
